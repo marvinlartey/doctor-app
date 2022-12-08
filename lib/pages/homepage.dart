@@ -65,6 +65,65 @@ class Homepage extends StatelessWidget {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(22)))),
           ),
+        ),
+
+        Row(
+          children: [
+            const Text("Top Doctor"),
+            const Expanded(child: SizedBox()),
+            TextButton(onPressed: () {}, child: const Text("See More")),
+            const Icon(
+              Icons.arrow_forward,
+              color: Color.fromARGB(255, 106, 143, 228),
+            ),
+          ],
+        ),
+
+        Row(
+          children: [
+            Card(
+              elevation: 4,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset('assets/images/doc1.jpg'),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Dre. Lydia"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shadowColor: Color.fromARGB(77, 77, 77, 77)),
+                        onPressed: () {},
+                        child: const Text("General Practitiner"),
+                      ),
+                    )
+                  ]),
+            ),
+            Card(
+              elevation: 4,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset('assets/images/doc1.jpg'),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Dre. Lydia"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shadowColor: Color.fromARGB(77, 77, 77, 77)),
+                        onPressed: () {},
+                        child: const Text("General Practitiner"),
+                      ),
+                    )
+                  ]),
+            ),
+          ],
         )
       ]),
     );

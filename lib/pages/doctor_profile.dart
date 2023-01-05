@@ -1,5 +1,5 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'pie.dart';
 
@@ -25,6 +25,51 @@ class _DoctorProfileState extends State<DoctorProfile> {
             centerTitle: true,
             expandedHeight: MediaQuery.of(context).size.height * 0.35,
             title: const Text('Profile'),
+            flexibleSpace: Stack(fit: StackFit.passthrough, children: [
+              Expanded(
+                child: Image.asset(
+                  'assets/images/doc1.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                  right: 20,
+                  bottom: 100,
+                  height: 50,
+                  width: 150,
+                  child: Card(
+                    child: Container(
+                      width: 60,
+                      height: 50,
+                      color: const Color.fromARGB(255, 233, 229, 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(children: [
+                          const Text("5.0"),
+                          RatingBar(
+                            itemSize: 18,
+                            initialRating: 5,
+                            onRatingUpdate: _DoStuff,
+                            ratingWidget: RatingWidget(
+                                full: const Icon(
+                                  Icons.star,
+                                  size: 10,
+                                ),
+                                half: const Icon(
+                                  Icons.abc,
+                                  size: 15,
+                                ),
+                                empty: const Icon(
+                                  Icons.star,
+                                  size: 15,
+                                  color: Colors.grey,
+                                )),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ))
+            ]),
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -80,9 +125,16 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               ),
                             ),
                             Container(
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [
+                                    Color.fromARGB(255, 119, 185, 244),
+                                    Color.fromARGB(255, 43, 131, 198),
+                                  ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter)),
                               width: MediaQuery.of(context).size.width * 0.9,
                               height: 70,
-                              color: Colors.blue,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Padding(
@@ -116,10 +168,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                       const Spacer(),
                                       ElevatedButton(
                                         onPressed: (() {}),
-                                        child: Text("Open"),
                                         style: ElevatedButton.styleFrom(
                                             onPrimary: Colors.blue,
                                             primary: Colors.white),
+                                        child: const Text("  Open  "),
                                       ),
                                     ],
                                   ),
@@ -132,25 +184,28 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Make an Appointment'),
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(22)),
-                          minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.9, 55))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    color: Colors.amber,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(22),
                     child: Container(
-                      color: Colors.black,
-                      width: 22,
-                      height: 2222,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: 55,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 119, 185, 244),
+                              Color.fromARGB(255, 43, 131, 198),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Make an Appointment',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 )
@@ -161,4 +216,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
       ),
     ));
   }
+
+  void _DoStuff(double value) {}
 }

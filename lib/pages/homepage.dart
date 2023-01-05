@@ -17,146 +17,156 @@ class Homepage extends StatelessWidget {
           ),
           onPressed: () {},
         ),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          // AppBar
-          Container(
-            color: const Color.fromARGB(255, 52, 141, 201),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
+        body: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            // AppBar
+            Container(
+              color: const Color.fromARGB(255, 52, 141, 201),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    // Profile Picture
+                    const CircleAvatar(
+                      backgroundImage: AssetImage(
+                        'assets/images/download.jpg',
+                      ),
+                      radius: 25,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text("Hello,",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 12)),
+                        Text("John Smith",
+                            style: TextStyle(color: Colors.white, fontSize: 15))
+                      ],
+                    ),
+                    const Expanded(child: SizedBox()),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.menu,
+                          size: 30,
+                          color: Colors.white,
+                        ))
+                  ],
+                ),
+              ),
+            ),
+            // search bar
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 22, vertical: 8),
+              child: SizedBox(
+                height: 50,
+                child: TextField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search,
+                          color: Color.fromARGB(255, 66, 63, 63)),
+                      hintText: "Search",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(22)))),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 11),
               child: Row(
                 children: [
-                  // Profile Picture
-                  const CircleAvatar(
-                    backgroundImage: AssetImage(
-                      'assets/images/download.jpg',
-                    ),
-                    radius: 25,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("Hello,",
-                          style: TextStyle(color: Colors.white, fontSize: 12)),
-                      Text("John Smith",
-                          style: TextStyle(color: Colors.white, fontSize: 15))
-                    ],
+                  const Text(
+                    "Top Doctor",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   const Expanded(child: SizedBox()),
-                  IconButton(
+                  TextButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.menu,
-                        size: 30,
-                        color: Colors.white,
-                      ))
+                      child: const Text(
+                        "See More",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 13),
+                      )),
+                  const Icon(
+                    Icons.arrow_forward,
+                    color: Color.fromARGB(255, 106, 143, 228),
+                    size: 20,
+                  ),
                 ],
               ),
             ),
-          ),
-          // search bar
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22, vertical: 8),
-            child: SizedBox(
-              height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search,
-                        color: Color.fromARGB(255, 66, 63, 63)),
-                    hintText: "Search",
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(22)))),
+            // Top Doctor Row
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 11),
+              child: Row(
+                children: const [
+                  DoctorCard(
+                    image: 'assets/images/doc1.jpg',
+                    name: "Dr. Lydia",
+                    specialization: "General Practitiner",
+                  ),
+                  DoctorCard(
+                    image: 'assets/images/doc2.jpg',
+                    name: 'Dr. Sylvia',
+                    specialization: "General Practitioner",
+                  )
+                ],
               ),
             ),
-          ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "What Do You Need?",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 11),
-            child: Row(
-              children: [
-                const Text(
-                  "Top Doctor",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-                const Expanded(child: SizedBox()),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "See More",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                    )),
-                const Icon(
-                  Icons.arrow_forward,
-                  color: Color.fromARGB(255, 106, 143, 228),
-                  size: 20,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: const [
+                  ServiceCard(
+                    name: 'Consultation',
+                    image: 'assets/images/doc1.jpg',
+                  ),
+                  ServiceCard(
+                    name: 'Lab Work',
+                    image: 'assets/images/doc1.jpg',
+                  ),
+                  ServiceCard(
+                    name: 'Doctor',
+                    image: 'assets/images/doc1.jpg',
+                  ),
+                ],
+              ),
             ),
-          ),
-          // Top Doctor Row
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 11),
-            child: Row(
-              children: const [
-                DoctorCard(
-                  image: 'assets/images/doc1.jpg',
-                  name: "Dr. Lydia",
-                  specialization: "General Practitiner",
-                ),
-                DoctorCard(
-                  image: 'assets/images/doc2.jpg',
-                  name: 'Dr. Sylvia',
-                  specialization: "General Practitioner",
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: const [
+                  ServiceCard(
+                    name: 'Medicine',
+                    image: 'assets/images/doc1.jpg',
+                  ),
+                  ServiceCard(
+                    name: 'Injection',
+                    image: 'assets/images/doc1.jpg',
+                  ),
+                  ServiceCard(
+                    name: 'Ambulance',
+                    image: 'assets/images/doc1.jpg',
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              "What Do You Need?",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-          ),
-
-          Row(
-            children: const [
-              ServiceCard(
-                name: 'Consultation',
-                image: 'assets/images/doc1.jpg',
-              ),
-              ServiceCard(
-                name: 'Lab Work',
-                image: 'assets/images/doc1.jpg',
-              ),
-              ServiceCard(
-                name: 'Doctor',
-                image: 'assets/images/doc1.jpg',
-              ),
-            ],
-          ),
-          Row(
-            children: const [
-              ServiceCard(
-                name: 'Medicine',
-                image: 'assets/images/doc1.jpg',
-              ),
-              ServiceCard(
-                name: 'Injection',
-                image: 'assets/images/doc1.jpg',
-              ),
-              ServiceCard(
-                name: 'Ambulance',
-                image: 'assets/images/doc1.jpg',
-              ),
-            ],
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }
@@ -193,7 +203,7 @@ class ServiceCard extends StatelessWidget {
               child: Image.asset(
                 width: MediaQuery.of(context).size.width * 0.45,
                 image,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
             Center(
@@ -255,33 +265,35 @@ class DoctorCard extends StatelessWidget {
                     child: Image.asset(
                       height: MediaQuery.of(context).size.height * 0.2,
                       image!,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(
-                      left: 115,
-                      top: 110,
+                      width: 70,
                       right: 0,
+                      height: 30,
                       bottom: 8,
                       child: Container(
                         width: 55,
                         height: 55,
                         color: const Color.fromARGB(255, 233, 229, 10),
                         child: Row(children: [
-                          TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
+                          Row(
+                            children: const [
+                              Icon(
                                 Icons.star,
-                                size: 12,
+                                size: 18,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
-                              label: const Text(
+                              Text(
                                 "5.0",
                                 style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 14,
                                   color: Color.fromARGB(255, 0, 0, 0),
                                 ),
-                              ))
+                              )
+                            ],
+                          )
                         ]),
                       )),
                 ],

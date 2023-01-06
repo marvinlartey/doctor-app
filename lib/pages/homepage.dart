@@ -9,7 +9,7 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 159, 182, 216),
+        backgroundColor: const Color.fromARGB(255, 200, 205, 212),
         endDrawer: IconButton(
           icon: const Icon(
             Icons.menu,
@@ -22,7 +22,15 @@ class Homepage extends StatelessWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             // AppBar
             Container(
-              color: const Color.fromARGB(255, 52, 141, 201),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(22),
+                    bottomLeft: Radius.circular(22)),
+                gradient: LinearGradient(colors: [
+                  Color.fromARGB(255, 119, 185, 244),
+                  Color.fromARGB(255, 43, 131, 198),
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
@@ -52,7 +60,7 @@ class Homepage extends StatelessWidget {
                         onPressed: () {},
                         icon: const Icon(
                           Icons.menu,
-                          size: 30,
+                          size: 35,
                           color: Colors.white,
                         ))
                   ],
@@ -72,6 +80,7 @@ class Homepage extends StatelessWidget {
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
                           borderRadius: BorderRadius.all(Radius.circular(22)))),
                 ),
               ),
@@ -309,22 +318,40 @@ class DoctorCard extends StatelessWidget {
             ),
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.only(
+                    left: 8, right: 8, top: 8, bottom: 10),
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 119, 185, 244),
+                        Color.fromARGB(255, 43, 131, 198),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.transparent,
+                      onSurface: Colors.transparent,
+                      shadowColor: Colors.transparent,
                       minimumSize:
                           Size(MediaQuery.of(context).size.width * 2, 30),
-                      shadowColor: const Color.fromARGB(77, 77, 77, 77)),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DoctorProfile()),
-                    );
-                  },
-                  child: Text(
-                    specialization!,
-                    style: const TextStyle(fontSize: 12),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DoctorProfile()),
+                      );
+                    },
+                    child: Text(
+                      specialization!,
+                      style: const TextStyle(fontSize: 12),
+                    ),
                   ),
                 ),
               ),

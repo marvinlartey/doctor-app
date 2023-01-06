@@ -35,37 +35,41 @@ class _DoctorProfileState extends State<DoctorProfile> {
               Positioned(
                   right: 20,
                   bottom: 100,
-                  height: 50,
+                  height: 100,
                   width: 150,
-                  child: Card(
-                    child: Container(
-                      width: 60,
-                      height: 50,
-                      color: const Color.fromARGB(255, 233, 229, 10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(children: [
-                          const Text("5.0"),
-                          RatingBar(
-                            itemSize: 18,
-                            initialRating: 5,
-                            onRatingUpdate: _DoStuff,
-                            ratingWidget: RatingWidget(
-                                full: const Icon(
-                                  Icons.star,
-                                  size: 10,
-                                ),
-                                half: const Icon(
-                                  Icons.abc,
-                                  size: 15,
-                                ),
-                                empty: const Icon(
-                                  Icons.star,
-                                  size: 15,
-                                  color: Colors.grey,
-                                )),
+                  child: Container(
+                    width: 60,
+                    height: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            color: const Color.fromARGB(255, 233, 229, 10),
+                            child: Row(children: [
+                              const Text("5.0"),
+                              RatingBar(
+                                itemSize: 18,
+                                initialRating: 5,
+                                onRatingUpdate: _DoStuff,
+                                ratingWidget: RatingWidget(
+                                    full: const Icon(
+                                      Icons.star,
+                                      size: 10,
+                                    ),
+                                    half: const Icon(
+                                      Icons.abc,
+                                      size: 15,
+                                    ),
+                                    empty: const Icon(
+                                      Icons.star,
+                                      size: 15,
+                                      color: Colors.grey,
+                                    )),
+                              ),
+                            ]),
                           ),
-                        ]),
+                        ],
                       ),
                     ),
                   ))
@@ -184,30 +188,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(22),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
+                  child: GradientButton(
                       height: 55,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 119, 185, 244),
-                              Color.fromARGB(255, 43, 131, 198),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Make an Appointment',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      text: 'Make an Appointment'),
                 )
               ],
             ),
@@ -218,4 +202,39 @@ class _DoctorProfileState extends State<DoctorProfile> {
   }
 
   void _DoStuff(double value) {}
+}
+
+class GradientButton extends StatelessWidget {
+  const GradientButton({
+    Key? key,
+    required this.text,
+    required this.width,
+    required this.height,
+  }) : super(key: key);
+  final String text;
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(22),
+      child: Container(
+        width: width,
+        height: height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color.fromARGB(255, 119, 185, 244),
+            Color.fromARGB(255, 43, 131, 198),
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+      ),
+    );
+  }
 }

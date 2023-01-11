@@ -9,7 +9,7 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 200, 205, 212),
+        backgroundColor: const Color.fromARGB(255, 236, 237, 239),
         endDrawer: IconButton(
           icon: const Icon(
             Icons.menu,
@@ -68,20 +68,28 @@ class Homepage extends StatelessWidget {
               ),
             ),
             // search bar
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 22, vertical: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 8),
               child: SizedBox(
                 height: 50,
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search,
-                          color: Color.fromARGB(255, 66, 63, 63)),
-                      hintText: "Search",
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.all(Radius.circular(22)))),
+                child: Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: const TextField(
+                    textAlignVertical: TextAlignVertical.bottom,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search,
+                            color: Color.fromARGB(255, 163, 162, 162)),
+                        hintText: "Search",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(22)))),
+                  ),
                 ),
               ),
             ),
@@ -142,15 +150,15 @@ class Homepage extends StatelessWidget {
                 children: const [
                   ServiceCard(
                     name: 'Consultation',
-                    image: 'assets/images/doc1.jpg',
+                    icon: Icons.spatial_tracking_outlined,
                   ),
                   ServiceCard(
                     name: 'Lab Work',
-                    image: 'assets/images/doc1.jpg',
+                    icon: Icons.science_outlined,
                   ),
                   ServiceCard(
                     name: 'Doctor',
-                    image: 'assets/images/doc1.jpg',
+                    icon: Icons.headphones_outlined,
                   ),
                 ],
               ),
@@ -161,15 +169,15 @@ class Homepage extends StatelessWidget {
                 children: const [
                   ServiceCard(
                     name: 'Medicine',
-                    image: 'assets/images/doc1.jpg',
+                    icon: Icons.medication_liquid_sharp,
                   ),
                   ServiceCard(
                     name: 'Injection',
-                    image: 'assets/images/doc1.jpg',
+                    icon: Icons.vaccines_outlined,
                   ),
                   ServiceCard(
                     name: 'Ambulance',
-                    image: 'assets/images/doc1.jpg',
+                    icon: Icons.fire_truck,
                   ),
                 ],
               ),
@@ -185,11 +193,11 @@ class ServiceCard extends StatelessWidget {
   const ServiceCard({
     Key? key,
     required this.name,
-    required this.image,
+    required this.icon,
   }) : super(key: key);
 
   final String name;
-  final String image;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -201,37 +209,61 @@ class ServiceCard extends StatelessWidget {
       ),
       elevation: 4,
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.17,
-        width: MediaQuery.of(context).size.width * 0.30,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              flex: 3,
-              fit: FlexFit.tight,
-              child: Image.asset(
-                width: MediaQuery.of(context).size.width * 0.45,
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
+          height: MediaQuery.of(context).size.height * 0.19,
+          width: MediaQuery.of(context).size.width * 0.30,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(27),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  // overlayColor: getColor(Colors.green, Colors.red),
+                  foregroundColor: getColor(Colors.blue, Colors.white),
+                  backgroundColor: getColor(Colors.white, Colors.blue),
+                  // side: getBorder(Colors.white, Colors.white),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                onPressed: () {},
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          icon,
+                          size: 70,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(name),
+                    )
+                  ],
+                )),
+          )),
     );
   }
+}
+
+MaterialStateProperty<Color> getColor(Color color, Color colorPressed) {
+  final getColor = (Set<MaterialState> states) {
+    if (states.contains(MaterialState.pressed)) {
+      return colorPressed;
+    } else {
+      return color;
+    }
+  };
+  return MaterialStateProperty.resolveWith(getColor);
+}
+
+MaterialStateProperty<BorderSide> getBorder(Color color, Color colorPressed) {
+  final getBorder = (Set<MaterialState> states) {
+    if (states.contains(MaterialState.pressed)) {
+      return BorderSide(color: colorPressed, width: 2);
+    } else {
+      return BorderSide(color: color, width: 2);
+    }
+  };
+
+  return MaterialStateProperty.resolveWith(getBorder);
 }
 
 class DoctorCard extends StatelessWidget {
@@ -250,8 +282,10 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // CARD
     return Card(
       clipBehavior: Clip.antiAlias,
+      // BORDER
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
         side: const BorderSide(style: BorderStyle.none),
@@ -266,8 +300,7 @@ class DoctorCard extends StatelessWidget {
             Flexible(
               flex: 3,
               fit: FlexFit.tight,
-              // width: MediaQuery.of(context).size.width,
-              // height: MediaQuery.of(context).size.height * 0.155,
+              // STACK
               child: Stack(
                 children: [
                   SizedBox(
@@ -277,6 +310,7 @@ class DoctorCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
+                  // POSITION OF RATING BOX
                   Positioned(
                       width: 70,
                       right: 0,
@@ -287,27 +321,31 @@ class DoctorCard extends StatelessWidget {
                         height: 55,
                         color: const Color.fromARGB(255, 233, 229, 10),
                         child: Row(children: [
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.star,
-                                size: 18,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                              Text(
-                                "5.0",
-                                style: TextStyle(
-                                  fontSize: 14,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.star,
+                                  size: 18,
                                   color: Color.fromARGB(255, 0, 0, 0),
                                 ),
-                              )
-                            ],
+                                Text(
+                                  " 5.0",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ]),
                       )),
                 ],
               ),
             ),
+            // DOCTOR'S NAME
             Padding(
               padding: const EdgeInsets.only(left: 8, top: 8),
               child: Text(
@@ -316,6 +354,7 @@ class DoctorCard extends StatelessWidget {
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
+            // BUTTON
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(
